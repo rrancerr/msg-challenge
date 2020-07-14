@@ -1,9 +1,11 @@
 package de.stadler.marco.challenge;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Utils {
+
+    private static final int R = 6371;
+
     /**
      * Calculate distance between two points in latitude and longitude taking
      * into account height difference. If you are not interested in height
@@ -15,8 +17,6 @@ public class Utils {
      * @returns Distance in Meters
      */
     private static double calcDistance(double lat1, double lat2, double lon1, double lon2, double el1, double el2) {
-
-        final int R = 6371; // Radius of the earth
 
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
@@ -49,7 +49,6 @@ public class Utils {
             }
         }
 
-        //copy to the other side of the matrix
         printTwoDimensionalArray(result);
         return result;
     }

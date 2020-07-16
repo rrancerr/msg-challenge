@@ -30,8 +30,8 @@ public class Main {
                 {16, 52, 23, 27, 59, 0.0}
         };
 
-//        HeuristicCalculator calc = new HeuristicCalculator(distanceMatrix, locationArrayList);
-        HeuristicCalculator calc = new HeuristicCalculator(testMatrix, locationArrayList);
+        HeuristicCalculator calc = new HeuristicCalculator(distanceMatrix, locationArrayList);
+//        HeuristicCalculator calc = new HeuristicCalculator(testMatrix, locationArrayList);
         calc.calcNearestNeighbor();
 
     }

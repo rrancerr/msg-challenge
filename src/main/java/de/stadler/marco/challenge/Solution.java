@@ -48,16 +48,28 @@ public class Solution {
     }
 
     public void printSolution() {
+        int countLocations = 0;
+        int countDistances = 0;
         System.out.println("SUM-DISTANCE: " + this.sumDistance);
         System.out.print("Path: ");
-        for (Location location : this.locationPath) {
-            System.out.print(location.getCity() + " -> ");
+        ArrayList<Location> path = this.locationPath;
+        for (int i = 0; i < path.size(); i++) {
+            Location location = path.get(i);
+            countLocations++;
+            System.out.print(location.getCity());
+            if (!(i + 1 == path.size())) {
+                System.out.print(" -> ");
+            }
         }
         System.out.println();
+        System.out.println("Traveld to " + countLocations + " locations.");
         System.out.print("Distances: ");
         for (Double distance : this.distanceList) {
-            System.out.print(distance + " -> ");
+            countDistances++;
+            System.out.print(distance + " ");
         }
         System.out.println();
+        System.out.println("Amount of Distances: " + countDistances);
+
     }
 }

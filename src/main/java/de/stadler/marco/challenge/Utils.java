@@ -49,17 +49,6 @@ public class Utils {
             }
         }
 
-        printTwoDimensionalArray(result);
         return result;
-    }
-
-
-    private static void printTwoDimensionalArray(double[][] array) {
-        for (double[] doubles : array) {
-            for (double aDouble : doubles) {
-                System.out.println(aDouble + " ");
-            }
-            System.out.println();
-        }
     }
 }

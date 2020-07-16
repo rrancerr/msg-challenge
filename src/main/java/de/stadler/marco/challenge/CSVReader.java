@@ -39,9 +39,6 @@ public class CSVReader {
                         Double.parseDouble(tempArr[7])
                 );
 
-                System.out.println(currLocation.toString());
-                System.out.println();
-
                 result.add(currLocation);
             }
             br.close();

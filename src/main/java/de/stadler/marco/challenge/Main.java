@@ -19,8 +19,7 @@ public class Main {
             return;
         }
 
-        double[][] distanceMatrix = new double[locationArrayList.size()][locationArrayList.size()];
-        distanceMatrix = Utils.calcDistances(locationArrayList);
+        double[][] distanceMatrix = Utils.calcDistances(locationArrayList);
 
         double[][] testMatrix = {
                 {0.0, 14, 69, 26, 31, 16},

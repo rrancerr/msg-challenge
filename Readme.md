@@ -13,9 +13,9 @@ Im Verzeichnis
 ```sh
 /out/artifacts/msg_challenge_jar
 ```
-ist eine msg-challenge.jar Datei zu finden die das fertige und kompilierte Programm enthält.
+ist eine msg-challenge.jar Datei zu finden, die das fertige und kompilierte Programm enthält.
 
-Man kann das Ganze starten, indem man entweder das Projekt in IntelliJ öffnet und ausführt, oder aber man nutzt die (Windows-) Kommandozeile, navigiert zu besagter Directory und führt es mit diesem Befehl aus.
+Man kann das Ganze starten, indem man entweder das Projekt in IntelliJ öffnet und ausführt, oder aber man nutzt die (Windows-) Kommandozeile, navigiert zu besagter Directory und führt die jar-Datei mit diesem Befehl aus:
 
 ```sh
 java -cp msg-challenge.jar de.stadler.marco.challenge.Main

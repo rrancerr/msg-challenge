@@ -23,6 +23,7 @@ java -cp msg-challenge.jar de.stadler.marco.challenge.Main
 _(Natürlich unter der Vorraussetzung, dass Java installiert ist)_
 
 ##Gewählter Algorithmus
+
 Ich habe mich für die Nearest Neighbor Heuristik entschieden, da diese nach meiner Rechnung und Auffassung des Problems am nähesten an der perfekten Lösung ist.
 
 Ich bin von einem metrischen TSP ausgegangen, da im Normalfall die Distanzen nur irrelevant voneinander abweichen.
@@ -32,6 +33,7 @@ Demnach wäre die maximale Abweichung vom Lösungs Optimum
 (log(n)+1)/2 = log(21)+1/2 = 1,16
 ```
 ##Optimale Abfolge der Standorte
+
 Ismaning -> Passau -> Chemnitz -> Görlitz -> Berlin -> Braunschweig -> Hannover -> Hamburg -> Schortens -> Lingen -> Münster -> Essen -> Düsseldorf -> Hürth -> Eschborn -> Walldorf -> Bretten -> Leinfelden-Echterdingen -> St. Georgen -> Nürnberg -> Ingolstadt -> Ismaning
 
 Führt zu einer Gesamtdistanz von ca. 2.370 Kilometern (2370255.3062398825 Meter).

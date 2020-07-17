@@ -1,4 +1,4 @@
-#**MSG CHALLENGE - Readme **
+**MSG CHALLENGE - Readme**
 
 ###Hallo gutaussehender Beurteiler,
 

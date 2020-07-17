@@ -45,29 +45,22 @@ public class Solution {
     public String toString() {
 
         StringBuilder result = new StringBuilder();
-        int countLocations = 0;
-        int countDistances = 0;
-        result.append("SUM-DISTANCE: ").append(this.sumDistance).append("\n");
+        result.append("Sum Distance: ").append(this.sumDistance).append("\n");
         result.append("Path: ");
         List<Location> path = this.locationPath;
         for (int i = 0; i < path.size(); i++) {
             Location location = path.get(i);
-            countLocations++;
             result.append(location.getCity());
             if (i + 1 != path.size()) {
                 result.append(" -> ");
             }
         }
         result.append("\n");
-        result.append("Traveld to ").append(countLocations).append(" locations.\n");
         result.append("Distances: ");
         for (Double distance : this.distanceList) {
-            countDistances++;
             result.append(distance).append(" ");
         }
         result.append("\n");
-        result.append("Amount of Distances: ").append(countDistances).append("\n");
-
         return result.toString();
     }
 

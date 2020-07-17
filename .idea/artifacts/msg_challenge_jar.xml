@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="msg-challenge:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/msg_challenge_jar</output-path>
+    <root id="archive" name="msg-challenge.jar">
+      <element id="module-output" name="msg-challenge" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/geographiclib/GeographicLib-Java/1.49/GeographicLib-Java-1.49.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

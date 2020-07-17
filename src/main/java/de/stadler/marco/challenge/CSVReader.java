@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class CSVReader {
     public static List<Location> read(File file) {
         ArrayList<Location> result = new ArrayList<>();
 
-        try (FileReader fr = new FileReader(file)) {
+        try (FileReader fr = new FileReader(file, StandardCharsets.UTF_8)) {
             BufferedReader br = new BufferedReader(fr);
             String line;
             String[] tempArr;
@@ -57,7 +58,6 @@ public class CSVReader {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
         return result;
     }
 }

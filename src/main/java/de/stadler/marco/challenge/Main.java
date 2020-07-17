@@ -31,9 +31,10 @@ public class Main {
         HeuristicCalculator calc = new HeuristicCalculator(distanceMatrix, locationArrayList);
         calc.calcNearestNeighbor();
         Solution bestSolution = calc.getBestSolution();
-        System.out.println(bestSolution.toString());
         bestSolution = Utils.sortSolution(bestSolution);
         System.out.println(bestSolution.toString());
+
+        FileChooser.updateUI(bestSolution);
     }
 
 }

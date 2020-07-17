@@ -6,6 +6,11 @@ public class Utils {
 
     private static final int R = 6371;
 
+    private static final String START_CITY = "Ismaning";
+
+    private Utils() {
+    }
+
     /**
      * Calculate distance between two points in latitude and longitude taking
      * into account height difference. If you are not interested in height
@@ -46,6 +51,46 @@ public class Utils {
                 currentDistance = calcDistance(firstLat, secLat, firstLong, secLong, 0.0, 0.0);
                 result[i][j] = currentDistance;
                 result[j][i] = currentDistance; //assume symmetric TSP
+            }
+        }
+
+        return result;
+    }
+
+    /***
+     * Sort the solution - start and end in START_CITY
+     * @param bestSolution the solution with the shortest path
+     */
+    public static Solution sortSolution(Solution bestSolution) {
+        Solution result = new Solution(bestSolution.getSumDistance(), new ArrayList<>(), new ArrayList<>());
+
+        int temp;
+        for (int i = 0; i < bestSolution.getLocationPath().size(); i++) {
+            //search for the beginning
+            if (bestSolution.getLocationPath().get(i).getCity().equals(START_CITY)) {
+                temp = i;
+                //this is the new start of the list
+                //add the locations
+                while (result.getLocationPath().size() < bestSolution.getLocationPath().size()) {
+                    if (i == bestSolution.getLocationPath().size()) {
+                        //if it reached the end, start at the beginning of the list
+                        i = 0;
+                    } else {
+                        result.getLocationPath().add(bestSolution.getLocationPath().get(i));
+                    }
+                    i++;
+                }
+                //add the distances
+                while (result.getDistanceList().size() < bestSolution.getDistanceList().size()) {
+                    if (temp == bestSolution.getDistanceList().size()) {
+                        //if it reached the end, start at the beginning of the list
+                        temp = 0;
+                    }
+                    result.getDistanceList().add(bestSolution.getDistanceList().get(temp));
+
+                    temp++;
+                }
+                break;
             }
         }
 

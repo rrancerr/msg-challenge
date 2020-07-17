@@ -72,4 +72,10 @@ public class Solution {
         System.out.println("Amount of Distances: " + countDistances);
 
     }
+
+    public void reset() {
+        this.sumDistance = 0;
+        this.locationPath.clear();
+        this.distanceList.clear();
+    }
 }

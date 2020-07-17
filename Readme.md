@@ -3,7 +3,7 @@
 ###Hallo gutaussehender Beurteiler,
 
 
-mein Name ist Marco Stadler, und möchte mit dieser Datei kurz beschreiben wie mein Programm funktioniert.
+mein Name ist Marco Stadler, und möchte mit dieser Datei kurz beschreiben, wie mein Programm funktioniert.
 
 
 ##Ausführungshinweise

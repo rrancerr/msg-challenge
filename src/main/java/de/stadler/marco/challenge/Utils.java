@@ -1,27 +1,42 @@
 package de.stadler.marco.challenge;
 
-import java.util.ArrayList;
+import net.sf.geographiclib.Geodesic;
+import net.sf.geographiclib.GeodesicLine;
+import net.sf.geographiclib.GeodesicMask;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/***
+ * Class provides helper mehtods.
+ * @author Marco Stadler
+ */
 public class Utils {
 
     private static final int R = 6371;
 
     private static final String START_CITY = "Ismaning";
 
+    private static final Geodesic GEOD = Geodesic.WGS84;
+
     private Utils() {
     }
 
     /**
+     * @returns Distance in Meters
+     * @deprecated getDistanceFromLib and calcDistanceFormular lead to the same result, but the library-function
+     * provides more accuracy at higher distances
+     * <p>
+     * <p>
      * Calculate distance between two points in latitude and longitude taking
      * into account height difference. If you are not interested in height
      * difference pass 0.0. Uses Haversine method as its base.
      * <p>
      * lat1, lon1 Start point lat2, lon2 End point el1 Start altitude in meters
      * el2 End altitude in meters
-     *
-     * @returns Distance in Meters
      */
-    private static double calcDistance(double lat1, double lat2, double lon1, double lon2, double el1, double el2) {
+    @Deprecated
+    private static double calcDistanceFormular(double lat1, double lat2, double lon1, double lon2, double el1, double el2) {
 
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
@@ -38,17 +53,52 @@ public class Utils {
         return Math.sqrt(distance);
     }
 
-    public static double[][] calcDistances(ArrayList<Location> locationArrayList) {
-        //fill one side of the matrix
+    /**
+     * Get the distance between two points in meters.
+     *
+     * @param lat1 First point's latitude
+     * @param lon1 First point's longitude
+     * @param lat2 Second point's latitude
+     * @param lon2 Second point's longitude
+     * @return Distance between the first and the second point in meters
+     */
+    private static double getDistanceFromLib(double lat1, double lat2, double lon1, double lon2) {
+        GeodesicLine line = GEOD.InverseLine(lat1, lon1, lat2, lon2, GeodesicMask.DISTANCE_IN | GeodesicMask.LATITUDE | GeodesicMask.LONGITUDE);
+        return line.Distance();
+    }
+
+    /***
+     * Creates a 2D symmetric matrix of the distances of a locationlist
+     * example:<br>
+     * <code>
+     *           |    [0]   |    [1]
+     *           | Ismaning |   Berlin
+     *  --------------------------------
+     *    [0]    |          | distance
+     *           |   0.0    | Ismaning to
+     *  Ismaning |          | Berlin
+     *  --------------------------------
+     *    [1]    | distance |
+     *           | Berlin to|    0.0
+     *   Berlin  | Ismaning |
+     *
+     * </code>
+     * @param locationArrayList a locationarraylist that holds all the locations of the matrix
+     * @return a 2D symmetric matrix of the distances
+     */
+    public static double[][] calcDistances(List<Location> locationArrayList) {
         int arraySize = locationArrayList.size();
         double[][] result = new double[arraySize][arraySize];
         double currentDistance;
         for (int i = 0; i < arraySize; i++) {
-            double firstLat = locationArrayList.get(i).getLatitude(), firstLong = locationArrayList.get(i).getLongitude(), secLat, secLong;
+            double firstLat = locationArrayList.get(i).getLatitude();
+            double firstLong = locationArrayList.get(i).getLongitude();
+            double secLat;
+            double secLong;
             for (int j = i + 1; j < arraySize; j++) {
                 secLat = locationArrayList.get(j).getLatitude();
                 secLong = locationArrayList.get(j).getLongitude();
-                currentDistance = calcDistance(firstLat, secLat, firstLong, secLong, 0.0, 0.0);
+                currentDistance = getDistanceFromLib(firstLat, secLat, firstLong, secLong);
                 result[i][j] = currentDistance;
                 result[j][i] = currentDistance; //assume symmetric TSP
             }
@@ -93,7 +143,6 @@ public class Utils {
                 break;
             }
         }
-
         return result;
     }
 }

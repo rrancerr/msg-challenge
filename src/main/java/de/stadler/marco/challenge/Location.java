@@ -1,5 +1,10 @@
 package de.stadler.marco.challenge;
 
+
+/***
+ * This object fits the data structure of the csv-file
+ * @author Marco Stadler
+ */
 public class Location {
     private final int number;
     private final String msgLocationName;
@@ -33,26 +38,6 @@ public class Location {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 '}';
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public String getMsgLocationName() {
-        return msgLocationName;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
     }
 
     public String getCity() {

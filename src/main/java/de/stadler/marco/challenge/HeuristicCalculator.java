@@ -2,16 +2,21 @@ package de.stadler.marco.challenge;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+
+/***
+ * @author Marco Stadler
+ */
 public class HeuristicCalculator {
 
     private final double[][] matrix;
     private final int[][] alreadyUsedPaths;
-    private final ArrayList<Location> locationArrayList;
-    private Solution currentSolution;
-    private ArrayList<Solution> solutions;
+    private final List<Location> locationArrayList;
+    private final Solution currentSolution;
+    private final ArrayList<Solution> solutions;
 
-    public HeuristicCalculator(double[][] matrix, ArrayList<Location> locationArrayList) {
+    public HeuristicCalculator(double[][] matrix, List<Location> locationArrayList) {
         this.matrix = matrix;
         this.locationArrayList = locationArrayList;
         this.currentSolution = new Solution(0.0, new ArrayList<>(), new ArrayList<>());
@@ -20,9 +25,13 @@ public class HeuristicCalculator {
     }
 
 
+    /***
+     * Calculates all possible solutions by solving the TSP with the nearest neighbor heuristic.
+     * There are more solutions because the algorithm tries all locations as the start of the journey.
+     * All solutions are saved into the solutions ArrayList of the class.
+     */
     public void calcNearestNeighbor() {
-        if (this.locationArrayList == null || this.currentSolution == null) {
-            System.out.println("ERROR: Calculation not possible -> variables not initialized");
+        if (this.locationArrayList == null) {
             return;
         }
 
@@ -41,7 +50,7 @@ public class HeuristicCalculator {
                     //check the column
                     for (int i = 0; i < matrix.length; i++) {
                         currentDistance = matrix[i][lastMatrixLocation.getColIdx()];
-                        if (!isAlreadyInPath(i, lastMatrixLocation.getColIdx()) && currentDistance != 0.0) {
+                        if (isNotAlreadyInPath(i, lastMatrixLocation.getColIdx()) && currentDistance != 0.0) {
                             if (currentShortestDistance == -1) {
                                 //this is the first iteration
                                 currentShortestDistance = currentDistance;
@@ -58,7 +67,7 @@ public class HeuristicCalculator {
                     //check the row
                     for (int i = 0; i < matrix.length; i++) {
                         currentDistance = matrix[lastMatrixLocation.getRowIdx()][i];
-                        if (!isAlreadyInPath(lastMatrixLocation.getRowIdx(), i) && currentDistance != 0.0) {
+                        if (isNotAlreadyInPath(lastMatrixLocation.getRowIdx(), i) && currentDistance != 0.0) {
                             if (currentShortestDistance == -1) {
                                 //this is the first iteration
                                 currentShortestDistance = currentDistance;
@@ -78,12 +87,10 @@ public class HeuristicCalculator {
                 currentShortestDistance = -1;
                 checkColumn = !checkColumn;
             }
-            System.out.println();
             Solution solutionToAdd = new Solution(currentSolution.getSumDistance(), new ArrayList<>(currentSolution.getLocationPath()), new ArrayList<>(currentSolution.getDistanceList()));
             this.solutions.add(solutionToAdd);
             resetVars();
         }
-        System.out.println("AMOUNT OF SOLUTIONS = " + this.solutions.size());
     }
 
     private void resetVars() {
@@ -148,13 +155,13 @@ public class HeuristicCalculator {
         }
     }
 
-    private boolean isAlreadyInPath(int rowIdx, int colIdx) {
-        return alreadyUsedPaths[rowIdx][colIdx] == 1;
+    private boolean isNotAlreadyInPath(int rowIdx, int colIdx) {
+        return alreadyUsedPaths[rowIdx][colIdx] != 1;
     }
 
     public Solution getBestSolution() {
         Solution result = null;
-        if (this.solutions == null || this.solutions.isEmpty()) {
+        if (this.solutions.isEmpty()) {
             return null;
         }
 

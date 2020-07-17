@@ -1,5 +1,9 @@
 package de.stadler.marco.challenge;
 
+/***
+ * Object holds all information of one 2D-matrixlocation
+ * @author Marco Stadler
+ */
 public class MatrixLocationObj {
     private int colIdx;
     private int rowIdx;

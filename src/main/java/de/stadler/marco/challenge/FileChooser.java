@@ -5,13 +5,21 @@ import java.awt.*;
 import java.io.File;
 
 import static de.stadler.marco.challenge.Main.gotData;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
+
+/***
+ * @author Marco Stadler
+ */
 public class FileChooser {
 
     private FileChooser() {
 
     }
 
+    /***
+     * displays the ui frame
+     */
     static void starter() {
         // Create and set up the window.
         final JFrame frame = new JFrame("Centered");
@@ -20,7 +28,7 @@ public class FileChooser {
         frame.setSize(200, 200);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new FlowLayout());
 
         JButton button = new JButton("Choose csv file...");
@@ -30,6 +38,11 @@ public class FileChooser {
         frame.getContentPane().add(button);
     }
 
+
+    /***
+     * creats the file-chooser window
+     * @param frame the frame where the filechooser shall be displayed
+     */
     private static void createFileChooser(final JFrame frame) {
 
         String filename = File.separator + "tmp";
@@ -41,7 +54,8 @@ public class FileChooser {
 
         File chosenFile = fileChooser.getSelectedFile();
 
-        System.out.println("File to open: " + chosenFile.getAbsolutePath());
-        gotData(chosenFile);
+        if (chosenFile != null) {
+            gotData(chosenFile);
+        }
     }
 }

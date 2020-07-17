@@ -1,32 +1,34 @@
 package de.stadler.marco.challenge;
 
-import java.util.ArrayList;
+import java.util.List;
 
+
+/***
+ * An object that has all information for one solution, including the summed up distance of the solution,
+ * the path itself as a list and the distances for each journey from one location to another as a list.
+ * @author Marco Stadler
+ */
 public class Solution {
     private double sumDistance;
-    private ArrayList<Location> locationPath;
-    private ArrayList<Double> distanceList;
+    private final List<Location> locationPath;
+    private final List<Double> distanceList;
 
 
-    public Solution(double sumDistance, ArrayList<Location> locationPath, ArrayList<Double> distanceList) {
+    public Solution(double sumDistance, List<Location> locationPath, List<Double> distanceList) {
         this.sumDistance = sumDistance;
         this.locationPath = locationPath;
         this.distanceList = distanceList;
     }
 
-    public ArrayList<Double> getDistanceList() {
+    public List<Double> getDistanceList() {
         return distanceList;
-    }
-
-    public void setDistanceList(ArrayList<Double> distanceList) {
-        this.distanceList = distanceList;
     }
 
     public double getSumDistance() {
         return sumDistance;
     }
 
-    public ArrayList<Location> getLocationPath() {
+    public List<Location> getLocationPath() {
         return locationPath;
     }
 
@@ -34,43 +36,39 @@ public class Solution {
         this.sumDistance = sumDistance;
     }
 
-    public void setLocationPath(ArrayList<Location> locationPath) {
-        this.locationPath = locationPath;
-    }
 
-    @Override
+    /***
+     * Creates a formatted string of the solution object, including the sum of the distances, the city-names of the
+     * path and the distances of the distances list.
+     * @return formatted String of the solution
+     */
     public String toString() {
-        return "Solution{" +
-                "sumDistance=" + sumDistance +
-                ", locationPath=" + locationPath +
-                ", distanceList=" + distanceList +
-                '}';
-    }
 
-    public void printSolution() {
+        StringBuilder result = new StringBuilder();
         int countLocations = 0;
         int countDistances = 0;
-        System.out.println("SUM-DISTANCE: " + this.sumDistance);
-        System.out.print("Path: ");
-        ArrayList<Location> path = this.locationPath;
+        result.append("SUM-DISTANCE: ").append(this.sumDistance).append("\n");
+        result.append("Path: ");
+        List<Location> path = this.locationPath;
         for (int i = 0; i < path.size(); i++) {
             Location location = path.get(i);
             countLocations++;
-            System.out.print(location.getCity());
-            if (!(i + 1 == path.size())) {
-                System.out.print(" -> ");
+            result.append(location.getCity());
+            if (i + 1 != path.size()) {
+                result.append(" -> ");
             }
         }
-        System.out.println();
-        System.out.println("Traveld to " + countLocations + " locations.");
-        System.out.print("Distances: ");
+        result.append("\n");
+        result.append("Traveld to ").append(countLocations).append(" locations.\n");
+        result.append("Distances: ");
         for (Double distance : this.distanceList) {
             countDistances++;
-            System.out.print(distance + " ");
+            result.append(distance).append(" ");
         }
-        System.out.println();
-        System.out.println("Amount of Distances: " + countDistances);
+        result.append("\n");
+        result.append("Amount of Distances: ").append(countDistances).append("\n");
 
+        return result.toString();
     }
 
     public void reset() {

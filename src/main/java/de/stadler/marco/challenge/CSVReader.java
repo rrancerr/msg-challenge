@@ -5,15 +5,27 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+/***
+ * @author Marco Stadler
+ */
 public class CSVReader {
     private static final String DELIMITER = ",";
 
-    public static ArrayList<Location> read(File file) {
+    private CSVReader() {
+
+    }
+
+    /***
+     * reads out the data of the csv-file
+     * @param file the file that yields the data
+     * @return the mapped data as a list of Location objects
+     */
+    public static List<Location> read(File file) {
         ArrayList<Location> result = new ArrayList<>();
 
-        try {
-            FileReader fr = new FileReader(file);
+        try (FileReader fr = new FileReader(file)) {
             BufferedReader br = new BufferedReader(fr);
             String line;
             String[] tempArr;
